@@ -11,12 +11,13 @@ export default function ContactSection() {
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    const form = event.currentTarget;
 
     setIsSubmitting(true);
     setSuccessMessage("");
     setErrorMessage("");
 
-    const formData = new FormData(event.currentTarget);
+    const formData = new FormData(form);
     const payload = {
       name: String(formData.get("name") ?? ""),
       email: String(formData.get("email") ?? ""),
@@ -40,7 +41,7 @@ export default function ContactSection() {
         throw new Error(result.error ?? "Failed to send your message.");
       }
 
-      event.currentTarget.reset();
+      form.reset();
       setSuccessMessage("Your message has been sent successfully.");
     } catch (error) {
       const message =
