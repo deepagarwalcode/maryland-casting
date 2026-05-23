@@ -19,7 +19,7 @@ export default function Hero() {
       
       <div className="mx-auto max-w-7xl px-6 lg:px-8 flex flex-col items-center justify-center text-center">
         <h1 className="text-4xl font-clash font-bold uppercase tracking-wider text-white sm:text-6xl md:text-7.5xl drop-shadow-xl animate-in fade-in zoom-in duration-1000">
-          Municipal Castings <br className="hidden md:block" /> & Fabrication
+          Municipal Castings <br className="hidden md:block" /> & Steel Fabrication
         </h1>
         <div className="accent-line my-6" />
         <p className="mt-4 text-base md:text-lg leading-relaxed text-slate-100 max-w-3xl drop-shadow-md font-sans font-medium animate-in slide-in-from-bottom duration-1000 delay-300 fill-mode-both">
