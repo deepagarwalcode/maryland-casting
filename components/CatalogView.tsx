@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { allProducts } from "@/lib/helper";
-import { X, ExternalLink } from "lucide-react";
+import { X, ExternalLink, ChevronDown } from "lucide-react";
 
 export default function CatalogView() {
   const [selectedProduct, setSelectedProduct] = useState<string | null>(null);
@@ -13,16 +13,20 @@ export default function CatalogView() {
     ? allProducts.find((p) => p.name === selectedProduct)
     : null;
 
+  const selectedProductLabel = selectedProduct
+    ? allProducts.find((product) => product.name === selectedProduct)?.displayName
+    : "Show All";
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 min-h-screen">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-12 pb-6 border-b border-slate-150">
-        <h1 className="text-3xl font-clash font-bold uppercase tracking-wider text-primary mb-4 sm:mb-0">Product Catalog</h1>
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-12 pb-6 border-b-4 border-secondary">
+        <h1 className="text-3xl sm:text-4xl font-clash font-bold uppercase tracking-wider text-primary mb-4 sm:mb-0">Product Catalog</h1>
         <a
           href="https://canva.link/shg8q80rmqe3wv1"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 bg-primary hover:bg-secondary transition-all duration-300 text-white px-6 py-3 rounded-sm font-clash font-bold text-xs tracking-widest uppercase shadow-md hover:shadow-[0_0_20px_rgba(212,45,46,0.25)]"
+          className="inline-flex items-center gap-2 bg-primary hover:bg-secondary transition-all duration-300 text-white px-6 py-3 rounded-sm font-clash font-bold text-sm tracking-[0.18em] uppercase shadow-md hover:shadow-[0_0_20px_rgba(212,45,46,0.25)]"
         >
           View Full Product Catalog
           <ExternalLink size={14} />
@@ -31,29 +35,69 @@ export default function CatalogView() {
 
       <div className="flex flex-col lg:flex-row gap-12">
         {/* Sidebar */}
-        <div className="w-full lg:w-64 shrink-0 flex flex-col gap-2 bg-slate-50/50 p-4 rounded-xl border border-slate-100 h-fit">
-          <button
-            onClick={() => setSelectedProduct(null)}
-            className={`text-left px-4 py-3 rounded-sm font-clash text-xs tracking-wider uppercase transition-all duration-200 border-l-4 ${selectedProduct === null
-              ? "bg-white border-secondary text-primary font-bold shadow-sm"
-              : "border-transparent text-slate-500 hover:text-primary hover:bg-white/50 font-semibold"
-              }`}
-          >
-            Show All
-          </button>
-
-          {allProducts.map((product) => (
-            <button
-              key={product.name}
-              onClick={() => setSelectedProduct(product.name)}
-              className={`text-left px-4 py-3 rounded-sm font-clash text-xs tracking-wider uppercase transition-all duration-200 border-l-4 ${selectedProduct === product.name
-                ? "bg-white border-secondary text-primary font-bold shadow-sm"
-                : "border-transparent text-slate-500 hover:text-primary hover:bg-white/50 font-semibold"
-                }`}
+        <div className="w-full lg:w-64 shrink-0">
+          <div className="lg:hidden">
+            <label
+              htmlFor="catalog-product-select"
+              className="mb-3 block text-sm font-clash font-bold tracking-[0.18em] uppercase text-primary"
             >
-              {product.displayName}
+              Select Product
+            </label>
+            <div className="relative">
+              <select
+                id="catalog-product-select"
+                value={selectedProduct ?? ""}
+                onChange={(event) =>
+                  setSelectedProduct(event.target.value || null)
+                }
+                className="w-full appearance-none rounded-xl border border-slate-200 bg-slate-50/70 px-4 py-4 pr-12 text-sm font-clash font-bold tracking-[0.12em] uppercase text-primary shadow-sm outline-none transition-colors focus:border-secondary"
+              >
+                <option value="">Show All</option>
+                {allProducts.map((product) => (
+                  <option key={product.name} value={product.name}>
+                    {product.displayName}
+                  </option>
+                ))}
+              </select>
+              <ChevronDown
+                size={18}
+                className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-secondary"
+              />
+            </div>
+            <p className="mt-3 text-sm font-sans font-medium text-slate-500">
+              Currently viewing:{" "}
+              <span className="font-semibold text-primary">
+                {selectedProductLabel}
+              </span>
+            </p>
+          </div>
+
+          <div className="hidden lg:flex lg:flex-col lg:gap-2 lg:bg-slate-50/50 lg:p-4 lg:rounded-xl lg:border lg:border-slate-100 lg:h-fit">
+            <button
+              onClick={() => setSelectedProduct(null)}
+              className={`text-left px-4 py-3 rounded-sm font-clash text-sm tracking-[0.14em] uppercase transition-all duration-200 border-l-4 ${
+                selectedProduct === null
+                  ? "bg-white border-secondary text-primary font-bold shadow-sm"
+                  : "border-transparent text-slate-500 hover:text-primary hover:bg-white/50 font-semibold"
+              }`}
+            >
+              Show All
             </button>
-          ))}
+
+            {allProducts.map((product) => (
+              <button
+                key={product.name}
+                onClick={() => setSelectedProduct(product.name)}
+                className={`text-left px-4 py-3 rounded-sm font-clash text-sm tracking-[0.14em] uppercase transition-all duration-200 border-l-4 ${
+                  selectedProduct === product.name
+                    ? "bg-white border-secondary text-primary font-bold shadow-sm"
+                    : "border-transparent text-slate-500 hover:text-primary hover:bg-white/50 font-semibold"
+                }`}
+              >
+                {product.displayName}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Content Area */}
@@ -112,7 +156,7 @@ export default function CatalogView() {
                   </div>
 
                   <div className="border-b border-slate-100 pb-3 mb-8 relative">
-                    <h3 className="text-xs font-clash font-bold uppercase tracking-widest text-primary">
+                    <h3 className="text-sm font-clash font-bold uppercase tracking-[0.18em] text-primary">
                       Product Gallery
                     </h3>
                     <span className="absolute bottom-0 left-0 w-12 h-[3px] bg-secondary rounded-full" />

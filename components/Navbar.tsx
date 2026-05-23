@@ -10,7 +10,7 @@ const navLinks = [
   { name: "HOME", href: "/" },
   { name: "ABOUT", href: "/#about" },
   { name: "PRODUCT CATALOG", href: "/catalog" },
-  { name: "CONTACT US", href: "/#contact" },
+  { name: "CONTACT US", href: "/contact" },
 ];
 
 export default function Navbar() {
@@ -60,7 +60,7 @@ export default function Navbar() {
               <Link
                 key={link.name}
                 href={link.href}
-                className={`text-xs font-clash font-semibold tracking-widest transition-all duration-300 relative py-2 group ${
+                className={`text-sm font-clash font-semibold tracking-[0.22em] transition-all duration-300 relative py-2 group ${
                   isTransparentHeroNav
                     ? "text-white hover:text-secondary"
                     : "text-primary hover:text-secondary"
@@ -97,7 +97,7 @@ export default function Navbar() {
                 key={link.name}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="block text-sm font-clash font-semibold tracking-widest text-primary hover:text-secondary transition-colors border-b border-slate-50 pb-2"
+                className="block text-base font-clash font-semibold tracking-[0.18em] text-primary hover:text-secondary transition-colors border-b border-slate-50 pb-2"
               >
                 {link.name}
               </Link>

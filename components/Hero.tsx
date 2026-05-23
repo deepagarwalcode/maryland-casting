@@ -23,7 +23,7 @@ export default function Hero() {
         </h1>
         <div className="accent-line my-6" />
         <p className="mt-4 text-base md:text-lg leading-relaxed text-slate-100 max-w-3xl drop-shadow-md font-sans font-medium animate-in slide-in-from-bottom duration-1000 delay-300 fill-mode-both">
-          High-quality, durable solutions built to exact specifications for all your municipal infrastructure and construction needs.
+          Municipal castings, fabrication, and product information.
         </p>
         <div className="mt-10 flex items-center justify-center gap-x-6 animate-in slide-in-from-bottom duration-1000 delay-500 fill-mode-both">
           <Link

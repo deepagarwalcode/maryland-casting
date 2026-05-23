@@ -39,10 +39,20 @@ export default function Carousel() {
 
   useEffect(() => {
     if (!emblaApi) return;
-    onSelect();
-    setScrollSnaps(emblaApi.scrollSnapList());
+
+    const frame = window.requestAnimationFrame(() => {
+      onSelect();
+      setScrollSnaps(emblaApi.scrollSnapList());
+    });
+
     emblaApi.on("select", onSelect);
     emblaApi.on("reInit", onSelect);
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+      emblaApi.off("select", onSelect);
+      emblaApi.off("reInit", onSelect);
+    };
   }, [emblaApi, onSelect]);
 
   return (

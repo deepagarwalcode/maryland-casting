@@ -9,7 +9,12 @@ const montserrat = Montserrat({
 
 export const metadata: Metadata = {
   title: "Maryland Casting - Municipal Castings & Fabrication",
-  description: "High-quality, durable solutions built to exact specifications for all your municipal infrastructure and construction needs.",
+  description: "Municipal castings, fabrication, product catalog, and contact information.",
+  icons: {
+    icon: "/mc-logo.png",
+    shortcut: "/mc-logo.png",
+    apple: "/mc-logo.png",
+  },
 };
 
 export default function RootLayout({

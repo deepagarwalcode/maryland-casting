@@ -1,16 +1,14 @@
-import CatalogView from "@/components/CatalogView";
 import ContactSection from "@/components/ContactSection";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-export default function Catalog() {
+export default function ContactPage() {
   return (
     <main className="min-h-screen bg-white">
       <Navbar />
-      <div className="pt-24 pb-12 bg-white">
-        <CatalogView />
+      <div className="pt-24 bg-white">
+        <ContactSection />
       </div>
-      <ContactSection />
       <Footer />
     </main>
   );
