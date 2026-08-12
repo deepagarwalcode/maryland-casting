@@ -8,5 +8,4 @@ export const contactInfo = {
 export const officeLocations = [
   "Laurel, MD, USA.",
   "Phoenix, Arizona, USA.",
-  "Kolkata, West Bengal, India.",
 ];
